@@ -69,7 +69,7 @@ for gameRound in range(20):
 
                         cr.scores(player,(res[0], int(res[1]))
 
-                        print(cr.showStatus())
+                        cr.showStatus()
 
                         break
 
