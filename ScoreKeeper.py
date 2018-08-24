@@ -58,19 +58,24 @@ for gameRound in range(20):
                         print("Quit the game!")
                         return(0)
 
-                    elif res == "":
+
+                    elif res in player:
                         res = res.split("x")
+                        if cr.checkifclosed(player):
+                            print("No points scored")
+                            print("===")
+                            print(cr.showStatus())
                         cr.hit(player, res[0], int(res[1]))
-                        print("===")
+
+                        cr.scores(player,(res[0], int(res[1]))
+
+                        print(cr.showStatus())
+
                         break
-                        if cr.checkifclosed(name):
-                            print("Closed for Scoring")
-                            return(0)
-                        else:
-                            cr.scores(player,(res[0], int(res[1]))
 
                     else:
-                        print()
+                        print("try again cricketnumberx3(2)(1)")
+                        break
                 except:
                     print("Invailed value has been input!")
                     print("Try again : ", end="")
@@ -108,4 +113,6 @@ class Cricket():
                 score = player.get('score')
                 new_score = (score * mult) + score
                 player.update(score = new_score)
-    def showStatus(self)
+    def showStatus(self):
+        for player in self.players:
+            return(player)
