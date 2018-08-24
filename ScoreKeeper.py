@@ -8,25 +8,27 @@
 import numpy as np
 
 
-Player_1 = {
+Player_One = {
     "15": 0,
     "16": 0,
     "17": 0,
     "18": 0,
     "19": 0,
     "20": 0,
-    "bull": 0
+    "bull": 0,
+    "score": 0
 }
 
 
-Player_2 = {
+Player_Two = {
     "15": 0,
     "16": 0,
     "17": 0,
     "18": 0,
     "19": 0,
     "20": 0,
-    "bull": 0
+    "bull": 0,
+    "score": 0
 }
 
 
@@ -36,12 +38,13 @@ Player_2 = {
 
 turnTitle = ["1st", "2nd", "3rd"]
 
-Players = [Player_One, PLayer_Two]
+Players = [Player_One, Player_Two]
+cr = Cricket(Players)
 for gameRound in range(20):
     for player in players:
         print(player + " : Throw your darts!")
         print(" (ex) triple of 20 #=> 20x3 ")
-        print(" (ex) inner bull #=> bullseyex2 ")
+        print(" (ex) inner bull #=> bullx2 ")
         print(" (ex) out of Cricket-Numbers #=> ")
         print(" (ex) Quit the Game #=> quit ")
         for i in turnTitle:
@@ -56,39 +59,53 @@ for gameRound in range(20):
                         return(0)
 
                     elif res == "":
-
-
+                        res = res.split("x")
+                        cr.hit(player, res[0], int(res[1]))
+                        print("===")
                         break
+                        if cr.checkifclosed(name):
+                            print("Closed for Scoring")
+                            return(0)
+                        else:
+                            cr.scores(player,(res[0], int(res[1]))
 
                     else:
-                        res = res.split("x")
-                        cr.hit(name, res[0], int(res[1]))
-                        print(cr.showStatus())
-                        print("===")
-                        if cr.chkFullMarkFinish(name):
-                            print("Full mark finish!")
-                            return(0)
-
-                        cr.players[name].appendHistory(res[0], int(res[1]))
-                        break
-
+                        print()
                 except:
                     print("Invailed value has been input!")
                     print("Try again : ", end="")
 
 class Cricket():
     def __init__(self, players):
-        self.numOfPlayers = 2
         self.players = players
 
-    def __Hit__(self, CricketNumber, mult):
-        if CricketNumber in  self.players.keys():
-            if counter = 3:
-                self.player.values() = 3
-            elif counter = 2:
-                self.player.values() = 2
-            elif counter = 1:
-                self.players.values() = 1
+
+    def hit(self, CricketNumber, mult):
+
+        for player in self.players:
+            counter = mult
+            if CricketNumber in  player.keys():
+                if counter = 3:
+                    player.values() = 3
+                elif counter = 2:
+                    player.values() = 2
+                elif counter = 1:
+                    player.values() = 1
+                else:
+                    player.values() = 0
+
+    def checkifclosed(self, CricketNumber):
+        player1 = self.players[0]
+        player2 = self.players[1]
+            if player1.items() & player2.items():
+                return(True)
             else:
-                self.players.values() = 0
-    def __CheckifClosed__(self):
+                return(False)
+
+    def scores(self, CricketNumber, mult):
+        for player in self.players:
+            if player.values() == 3:
+                score = player.get('score')
+                new_score = (score * mult) + score
+                player.update(score = new_score)
+    def showStatus(self)
