@@ -19,8 +19,7 @@ Player_One = {
         "20": 0,
         "25": 0,
         "score": 0,
-        "name": 'player_one'
-    } 
+        "name": 'player_one'} 
 ```
     
 # Run the python application on terminal
