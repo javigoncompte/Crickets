@@ -1,11 +1,3 @@
-#take two inputs
-#have a parser dictionary
-# 20x1 20x2 20x3 acceptablae inputs
-
-
-
-
-
 
 def hit(player, CricketNumber, mult):
     counter = mult
@@ -23,8 +15,7 @@ def checkifclosed(players, CricketNumber):
     if player1[CricketNumber] and player2[CricketNumber] == 3:
         print("number is closed")
         return(True)
-    else:
-        return(False)
+    
 
 def scores(player, CricketNumber, mult):
   if player[str(CricketNumber)] == 3:
@@ -92,7 +83,7 @@ def runCricket():
 
                         elif 'x' in res:
                             res = res.split("x")
-                            if checkifclosed(Players, res[0]) == True:
+                            if checkifclosed(Players, res[0]):
                                 print("No points scored")
                                 print("===")
                                 print(showStatus(player))
