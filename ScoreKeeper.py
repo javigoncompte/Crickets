@@ -1,5 +1,5 @@
 
-def hit(player, CricketNumber, mult):
+def hit(player, CricketNumber, mult): #Counts number of hits and limit to 3
     counter = mult
     if CricketNumber in  player:
         hits = player[CricketNumber]
@@ -9,7 +9,7 @@ def hit(player, CricketNumber, mult):
         else:
             player[CricketNumber] = 3
 
-def checkifclosed(players, CricketNumber):
+def checkifclosed(players, CricketNumber): #Checks if the number is closed from other player
     player1 = players[0]
     player2 = players[1]
     if player1[CricketNumber] and player2[CricketNumber] == 3:
@@ -17,7 +17,7 @@ def checkifclosed(players, CricketNumber):
         return(True)
     
 
-def scores(player, CricketNumber, mult):
+def scores(player, CricketNumber, mult): #Handles scoring
   if player[str(CricketNumber)] == 3:
       score = player['score']
       if score != 0:
@@ -58,10 +58,10 @@ def runCricket():
         'name': 'player_2'
     }
 
-    turnTitle = ["1st", "2nd", "3rd"]
+    turnTitle = ["1st", "2nd", "3rd"] #Turns for darts
 
     Players = [Player_One, Player_Two]
-    for gameRound in range(20):
+    for gameRound in range(20): #max 20 rounds estimate of how long the Cricket game would last
         for player in Players:
             print(player['name'] + " : Throw your darts!")
             print(" (ex) triple of 20 #=> 20x3 ")
@@ -100,6 +100,6 @@ def runCricket():
                             break
                             
                     except:
-                        print("Invalid value has been input!")
+                        print("Invalid value has been input!") #for errors
                         print("Try again : ", end="")
 runCricket()
