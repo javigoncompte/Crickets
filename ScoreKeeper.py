@@ -12,14 +12,12 @@ def hit(player, CricketNumber, mult):
     
     counter = mult
     if CricketNumber in  player:
-        if counter == 3:
-            player[CricketNumber] = 3
-        elif counter == 2:
-            player[CricketNumber] = 2
-        elif counter == 1:
-            player[CricketNumber] = 1
+        hits = player[CricketNumber]
+        if hits < 3:
+          hits = counter + hits 
+          player[CricketNumber] = hits
         else:
-            player[CricketNumber] = 0
+          player[CricketNumber] = 3
 
 def checkifclosed(players, CricketNumber):
     player1 = players[0]
@@ -27,19 +25,22 @@ def checkifclosed(players, CricketNumber):
 
     if player1[CricketNumber] and player2[CricketNumber] == 3:
         print("number is closed")
-      return(True)
+        return(True)
     else:
       return(False)
 
 def scores(player, CricketNumber, mult):
-    
-    if player.values() == 3 and checkifclosed(player, CricketNumber) == True:
-        score = player.get('score')
-        new_score = (score * mult) + score
-        player.update(score = new_score)
+  if player[str(CricketNumber)] == 3:
+      score = player['score']
+      if score != 0:
 
-def showStatus(players):
-    for player in players:
+        new_score = (score * int(mult)) + score
+        player['score'] = new_score
+      else:
+        player['score'] = int(CricketNumber) * int(mult)
+      
+
+def showStatus(player):
         return(player)
 
 
@@ -53,7 +54,7 @@ def runCricket():
         "17": 0,
         "18": 0,
         "19": 0,
-        "20": 0,
+        "20": 3,
         "bull": 0,
         "score": 0,
         "name": 'player_one'
@@ -66,7 +67,7 @@ def runCricket():
         "17": 0,
         "18": 0,
         "19": 0,
-        "20": 0,
+        "20": 3,
         "bull": 0,
         "score": 0,
         'name': 'player_2'
@@ -75,7 +76,6 @@ def runCricket():
     turnTitle = ["1st", "2nd", "3rd"]
 
     Players = [Player_One, Player_Two]
-    cr = Cricket(Players)
     for gameRound in range(20):
         for player in Players:
             print(player['name'] + " : Throw your darts!")
@@ -98,21 +98,26 @@ def runCricket():
 
                         elif 'x' in res:
                             res = res.split("x")
-                            if cr.checkifclosed(player, res[0]):
+                            if checkifclosed(Players, res[0]) == True:
                                 print("No points scored")
                                 print("===")
-                                print(cr.showStatus())
+                                print(showStatus(player))
+                                break
                             else:
+                              scores(player,res[0], int(res[1]))
+                              hit(player, res[0], int(res[1]))
+                                
+                                
+                                
 
-                                cr.hit(player, res[0], int(res[1]))
-
-                                cr.scores(player,(res[0], int(res[1])))
-
-                                print(cr.showStatus())
+                              print(showStatus(player))
+                              break
+                            
 
                         else:
                             print("try again cricketnumberx3(2)(1)")
                             break
+                            
                     except:
                         print("Invalid value has been input!")
                         print("Try again : ", end="")
