@@ -7,6 +7,8 @@ Bullseye is 25 in this case
 
 Only Two players
 
+type "quit" to end the game
+
 Example of Player Boards
 
 ```
