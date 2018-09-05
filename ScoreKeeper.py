@@ -8,54 +8,48 @@
 
 
 def hit(player, CricketNumber, mult):
-
-    
     counter = mult
     if CricketNumber in  player:
         hits = player[CricketNumber]
         if hits < 3:
-          hits = counter + hits 
-          player[CricketNumber] = hits
+            hits = counter + hits
+            player[CricketNumber] = hits
         else:
-          player[CricketNumber] = 3
+            player[CricketNumber] = 3
 
 def checkifclosed(players, CricketNumber):
     player1 = players[0]
     player2 = players[1]
-
     if player1[CricketNumber] and player2[CricketNumber] == 3:
         print("number is closed")
         return(True)
     else:
-      return(False)
+        return(False)
 
 def scores(player, CricketNumber, mult):
   if player[str(CricketNumber)] == 3:
       score = player['score']
       if score != 0:
-
         new_score = (score * int(mult)) + score
         player['score'] = new_score
       else:
         player['score'] = int(CricketNumber) * int(mult)
       
-
-def showStatus(player):
+def showStatus(player): #SHOW player board
         return(player)
 
 
-# fucntions to have a hit 3 equals closed and compares both ones
 #input being 20 x1(single double or tripple)
-#score will work after value = 3 * the multiplier and add to score
 def runCricket():
+    #25 will be the bullseye
     Player_One = {
         "15": 0,
         "16": 0,
         "17": 0,
         "18": 0,
         "19": 0,
-        "20": 3,
-        "bull": 0,
+        "20": 0,
+        "25": 0,
         "score": 0,
         "name": 'player_one'
     }
@@ -67,8 +61,8 @@ def runCricket():
         "17": 0,
         "18": 0,
         "19": 0,
-        "20": 3,
-        "bull": 0,
+        "20": 0,
+        "25": 0,
         "score": 0,
         'name': 'player_2'
     }
@@ -80,7 +74,7 @@ def runCricket():
         for player in Players:
             print(player['name'] + " : Throw your darts!")
             print(" (ex) triple of 20 #=> 20x3 ")
-            print(" (ex) inner bull #=> bullx2 ")
+            print(" (ex) inner bull #=> 25x2 ")
             print(" (ex) out of Cricket-Numbers #=> ")
             print(" (ex) Quit the Game #=> quit ")
             for i in turnTitle:
@@ -104,12 +98,8 @@ def runCricket():
                                 print(showStatus(player))
                                 break
                             else:
-                              scores(player,res[0], int(res[1]))
+                              scores(player, res[0], int(res[1]))
                               hit(player, res[0], int(res[1]))
-                                
-                                
-                                
-
                               print(showStatus(player))
                               break
                             
@@ -121,7 +111,4 @@ def runCricket():
                     except:
                         print("Invalid value has been input!")
                         print("Try again : ", end="")
-
-
-
 runCricket()
