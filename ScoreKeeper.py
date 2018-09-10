@@ -2,13 +2,21 @@
 import pickle
 
 
-def hit(player, CricketNumber, mult): #Counts number of hits and limit to 3
+def hit(player, CricketNumber, mult):
+    #Counts number of hits and limit to 3
+    # takes in player, Cricket Number and number of hits
+    # counts to number of hits to each player in the score and sets a Number
+    # assures that the hit hits 3 and it reaches 3 without going over
+
     counter = mult
     if CricketNumber in  player:
         hits = player[CricketNumber]
         if hits < 3:
             hits = counter + hits
-            player[CricketNumber] = hits
+            if hits > 3:
+                player[CricketNumber] = 3
+            else:
+                player[CricketNumber] = hits
         else:
             player[CricketNumber] = 3
 
@@ -39,10 +47,16 @@ def scores(player, CricketNumber, mult):
       else:
         player['score'] = int(CricketNumber) * int(mult)
 
-def showStatus(player): #SHOW player board and save player board
-    #This function returns the board and saves the board after every action
+def showStatus(player):
 
-        return(player)
+    #SHOW player board and save player board
+    #This function returns the board and saves the board after every action
+    # "wb"  = open for writing, binary mode rb = reading binary
+
+    pickle.dump(player, open("player.p", "wb"))
+
+
+    return(player)
 
 
 def runCricket():
@@ -76,10 +90,16 @@ def runCricket():
 
     turnTitle = ["1st", "2nd", "3rd"] #Turntitles are the number of turns each player has
 
-    Players = [Player_One, Player_Two] # Set Players by making a list of Player1 and Player2
+    Players_Array = [Player_One, Player_Two] # Set Players by making a list of Player1 and Player2
+
+    #The idea of this was to store the players list into disk to avoid problems of memeory storage
+    players = pickle.dump(Players_Array, open("players_list.p", "wb"))
+
+    Players = pickle.load(open("players_list.p", "rb"))
     for gameRound in range(20): #The start of the game which is limited by 20(talked in the ReadMe as to why)
         for player in Players:
-        # For each player we will do the following steps
+
+            # For each player we will do the following steps
             print(player['name'] + " : Throw your darts!")
             print(" (ex) triple of 20 #=> 20x3 ")
             print(" (ex) inner bull #=> 25x2 ")
@@ -88,7 +108,9 @@ def runCricket():
 
 
             for i in turnTitle:
-            # for each Turn we will do
+
+                # for each Turn we will do
+
                 print("player [" + player['name'] + "] " + i + " dart of round" +
                       str(gameRound + 1) + " : ", end="")
 
@@ -115,10 +137,10 @@ def runCricket():
                                 print(showStatus(player))
                                 break
                             else:
-                              scores(player, res[0], int(res[1]))
-                              hit(player, res[0], int(res[1]))
-                              print(showStatus(player))
-                              break
+                                scores(player, res[0], int(res[1]))
+                                hit(player, res[0], int(res[1]))
+                                print(showStatus(player))
+                                break
 
 
                         else:
@@ -128,4 +150,6 @@ def runCricket():
                     except:
                         print("Invalid value has been input!") #for errors
                         print("Try again : ", end="")
+
+
 runCricket()
