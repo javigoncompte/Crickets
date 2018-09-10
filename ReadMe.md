@@ -1,5 +1,6 @@
 # Crickets ScoreKeeper
 Python 3.6.5
+
 Pickle 3.0 (It has explicit support for bytes objects and cannot be unpickled by Python 2.x. This is the default protocol, and the recommended protocol when compatibility with other Python 3 versions is required)
 
 Data was stored using Pickle into disk due to the serialization making the data streamed instead of being saved into a database
