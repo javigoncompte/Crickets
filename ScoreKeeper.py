@@ -121,6 +121,8 @@ def runCricket():
                         #Second Step will check if Cricket Number is Closed
                         #Third will do a score
                         # Give exceptions when user input error or invalid input
+                        # Divide the input by x which will give us cricket number and multiplier
+                        
 
                         res = input()
 
